@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 """EVARILOS Central Engine - Calculation of metrics for indoor localization performance benchmarking."""
 
