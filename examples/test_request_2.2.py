@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 """test_request_2.2.py: Request the metrics calculation in the online manner without interfacing the SUT."""
 

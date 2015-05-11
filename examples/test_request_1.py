@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 """test_request1.py: Request the metrics calculation of the indoor localization experiment performed offline."""
 

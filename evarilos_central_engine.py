@@ -1,3 +1,15 @@
+#!/usr/bin/env python
+
+"""EVARILOS Central Engine - Calculation of metrics for indoor localization performance benchmarking."""
+
+__author__ = "Filip Lemic"
+__copyright__ = "Copyright 2015, EVARILOS Project"
+
+__version__ = "1.0.0"
+__maintainer__ = "Filip Lemic"
+__email__ = "lemic@tkn.tu-berlin.de"
+__status__ = "Development"
+
 import sys
 import urllib
 import urllib2
@@ -227,15 +239,13 @@ def type1():
     experiment_results.scenario.testbed_label = experiment.scenario.testbed_label
     experiment_results.scenario.testbed_description = experiment.scenario.testbed_description
     experiment_results.scenario.experiment_description = experiment.scenario.experiment_description
-    #experiment_results.scenario.sut_description = experiment.scenario.sut_description
+    experiment_results.scenario.sut_description = experiment.scenario.sut_description
     experiment_results.scenario.receiver_description = experiment.scenario.receiver_description 
     experiment_results.scenario.sender_description = experiment.scenario.sender_description  
     experiment_results.scenario.interference_description = experiment.scenario.interference_description
     experiment_results.timestamp_utc = experiment.timestamp_utc
-    #experiment_results.experiment_label = experiment.experiment_label
-    experiment_results.sut.sut_name = 'None' 
-    experiment_results.sut.competitor = 'None'
-    experiment_results.sut.link = 'None'
+    experiment_results.experiment_label = experiment.experiment_label
+
     obj = json.dumps(protobuf_json.pb2json(experiment_results))
 
     response = {}
