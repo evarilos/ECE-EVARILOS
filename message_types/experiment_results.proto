@@ -1,0 +1,76 @@
+////////////////////////////////////////////////////////////////////////////////////
+// experiment_results.proto: Message type containing the results of the indoor 
+// localization benchmarking experiments.
+//
+// __author__ = "Filip Lemic"
+// __copyright__ = "Copyright 2015, EVARILOS Project"
+//
+// __version__ = "1.0.0"
+// __maintainer__ = "Filip Lemic"
+// __email__ = "lemic@tkn.tu-berlin.de"
+// __status__ = "Development"
+////////////////////////////////////////////////////////////////////////////////////
+
+package evarilos;
+
+message Experiment {
+	required int64 timestamp_utc = 1;                          // milliseconds from 1.1.1970
+	required string experiment_label = 2;                      // name of the experiment 
+	repeated Measurement_point locations = 3;                  // each experiment consists of a number of locations
+	required Scenario_description scenario = 4;                // describes the scenario
+	required Primary_metrics primary_metrics = 5;              // calculation of the primary metrics
+
+	message Measurement_point {
+		required int32 point_id = 1;                       // ID of the each point in the experiment
+		optional int32 localized_node_id = 2;              // ID of the localized node
+		optional string point_label = 3;                   // zero_truth: point label
+		required double true_coordinate_x = 4;             // zero-truth: x-coordinate
+		required double true_coordinate_y = 5;             // zero-truth: y-coordinate
+		optional double true_coordinate_z = 6;             // zero-truth: z-coordinate
+		optional string true_room_label = 7;               // zero-truth: room
+		optional string est_point_label = 8;               // estimated location: point label
+		required double est_coordinate_x = 9;              // estimated location: x-coordinate
+		required double est_coordinate_y = 10;             // estimated location: y-coordinate
+		optional double est_coordinate_z = 11;             // estimated location: z-coordinate
+		optional string est_room_label = 12;               // estimated location: room
+		optional double latency = 13;                      // latency of the location estimation at this location
+		optional double localization_error_2D = 14;        // 2D localization error of each point in the experiment
+		optional double localization_error_3D = 15;        // 3D localization error of each point in the experiment
+		optional double localization_correct_room = 16;    // room error of each point in the experiment
+		optional double power_consumption = 17;	           // power consuption estimate for each point in the experiment
+	}
+
+	message Primary_metrics {
+		optional double error_2D_average = 1;              // average 2D error of the accuracy of all points in the experiment
+		optional double error_2D_median = 2;               // median 2D error of the accuracy of all points in the experiment
+		optional double error_2D_std = 3;                  // 2D error standard deviation of the accuracy of all points in the experiment
+		optional double error_2D_min = 4;                  // min 2D error of the accuracy of all points in the experiment
+		optional double error_2D_max = 5;                  // max 2D error of the accuracy of all points in the experiment
+		optional double error_3D_average = 6;              // average 3D error of the accuracy of all points in the experiment
+		optional double error_3D_median = 7;               // median 3D error of the accuracy of all points in the experiment
+		optional double error_3D_std = 8;                  // 3D error standard deviation of the accuracy of all points in the experiment
+		optional double error_3D_min = 9;                  // min 3D error of the accuracy of all points in the experiment
+		optional double error_3D_max = 10;                 // max 3D error of the accuracy of all points in the experiment
+		optional double room_error_average = 11;           // average room accuracy error
+		optional double latency_average = 12;              // average latency
+		optional double latency_median = 13;               // latency median
+		optional double latency_std = 14;                  // latency standard deviation
+		optional double latency_min = 15;                  // latency min
+		optional double latency_max = 16;                  // latency max
+		optional double power_consumption_average = 17;    // average power consumption
+		optional double power_consumption_std = 18;        // standard deviation of the power consumption
+		optional double power_consumption_min = 19;        // min power consumption
+		optional double power_consumption_max = 20;        // max power consumption
+		optional double power_consumption_median = 21;     // median power consumption
+	}
+
+	message Scenario_description {
+		required string testbed_label = 1;                 // testbed label
+		required string testbed_description = 2;           // testbed description
+		required string experiment_description = 3;        // experiment description
+		required string sut_description = 4;               // system under test description
+		required string receiver_description = 5;          // receiver description
+		required string sender_description = 6;            // sender description
+		required string interference_description = 7;	   // interference description
+	}
+}

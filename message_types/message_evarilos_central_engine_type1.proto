@@ -1,0 +1,54 @@
+////////////////////////////////////////////////////////////////////////////////////
+// message_evarilos_engine_type1.proto: Message type used for communication with the 
+// EVARILOS Central Engine. This message type describes the experiment performed in 
+// the offline manner.
+//
+// __author__ = "Filip Lemic"
+// __copyright__ = "Copyright 2015, EVARILOS Project"
+//
+// __version__ = "1.0.0"
+// __maintainer__ = "Filip Lemic"
+// __email__ = "lemic@tkn.tu-berlin.de"
+// __status__ = "Development"
+////////////////////////////////////////////////////////////////////////////////////
+
+package evarilos;
+
+message ece_type1 {
+
+	required int64 timestamp_utc = 1;                          // timestamp - milliseconds from 1.1.1970
+	required string experiment_label = 2;                      // name of the experiment
+	repeated Evaluation_point locations = 3;                   // each experiment consists of a number of measurement locations
+	required Scenario_description scenario = 4;                // describes the scenario
+	optional double power_consumption_per_experiment = 5;      // power consumption of the localized node for this experiment
+	optional bool store_metrics = 6 [default = false];         // storing the metrics [true] or not [false]?
+
+	optional string metrics_storage_URI = 7;         	   // URI for storing the processed data
+	optional string metrics_storage_database = 8;		   // name of the database for storing the results
+	optional string metrics_storage_collection = 9;            // name of the collection for storing the results
+
+	message Evaluation_point {
+		required int32 point_id = 1;                       // ID of the each point in the experiment
+		optional int32 localized_node_id = 2;              // ID of the localized node
+		required double true_coordinate_x = 3;             // ground truth - x-coordinate
+		required double true_coordinate_y = 4;             // ground truth - y-coordinate
+		optional double true_coordinate_z = 5;             // ground truth - z-coordinate
+		optional string true_room_label = 6;               // ground truth - room label
+		required double est_coordinate_x = 7;              // estimated location - x-coordinate
+		required double est_coordinate_y = 8;              // estimated location - y-coordinate
+		optional double est_coordinate_z = 9;              // estimated location - z-coordinate
+		optional string est_room_label = 10;               // estimated location - room label
+		optional double latency = 11;                      // latency of the location estimation for this location
+		optional double power_consumption = 12;            // power consumption of localized node for this location 
+	}
+
+	message Scenario_description {
+		required string testbed_label = 1;                 // testbed label
+		required string testbed_description = 2;           // testbed description
+		required string experiment_description = 3;        // experiment description
+		required string sut_description = 4;               // SUT description
+		required string receiver_description = 5;          // receiver description
+		required string sender_description = 6;            // sender description
+		required string interference_description = 7;      // intererence description
+	}
+}

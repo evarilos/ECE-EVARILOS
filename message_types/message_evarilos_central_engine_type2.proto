@@ -1,0 +1,69 @@
+////////////////////////////////////////////////////////////////////////////////////
+// message_evarilos_engine_type2.proto: Message type used for communication with 
+// the EVARILOS Central Engine. This message type describes the experiment performed 
+// in the online manner.
+//
+// __author__ = "Filip Lemic"
+// __copyright__ = "Copyright 2015, EVARILOS Project"
+//
+// __version__ = "1.0.0"
+// __maintainer__ = "Filip Lemic"
+// __email__ = "lemic@tkn.tu-berlin.de"
+// __status__ = "Development"
+////////////////////////////////////////////////////////////////////////////////////
+
+package evarilos;
+
+message ece_type2 {
+
+	required int64 timestamp_utc = 1;                                // timestamp - milliseconds from 1.1.1970
+	required string experiment_label = 2;                            // name of the experiment
+	required Scenario_description scenario = 3;                      // describes the scenario
+	required bool request_raw_data = 4 [default = false];            // raw data requested in experiment? 
+	required bool request_estimates = 5 [default = false];	         // location estimates requested from SUT? 
+	required bool store_metrics = 6 [default = false];               // are the metrics stored in the experiment?
+	required bool request_power_consumption = 7 [default = false];   // is the power estimate requested from SUT? 
+	required Ground_truth ground_truth = 8;                          // ground truth location
+	optional Estimated_location estimate = 9;			 // estimated location 
+
+	// Interfacing to system under test
+
+	optional string sut_location_estimate_URI = 10;                  // URI of SUT's interface for requesting location estimate
+	optional string sut_raw_data_URI = 11;                           // URI of SUT's interface for requesting to store raw data
+	optional string sut_power_estimate_URI = 12;                     // URI of SUT's interface for requesting power estimate
+
+	// Storing the processed data
+
+	optional string metrics_storage_URI = 13;                        // URI for storing the processed data
+	optional string metrics_storage_database = 14;                   // name of the database for storing the results
+	optional string metrics_storage_collection = 15;                 // name of the collection for storing the results
+
+	message Ground_truth {
+		required int32 point_id = 1;                             // ID of the each point in the experiment
+		required int32 localized_node_id = 2;                    // ID of the localized node
+		optional string point_label = 3;                         // ground truth - point label
+		optional double true_coordinate_x = 4;                   // ground truth - x-coordinate
+		optional double true_coordinate_y = 5;                   // ground truth - y-coordinate
+		optional double true_coordinate_z = 6;                   // ground truth - z-coordinate
+		optional string true_room_label = 7;                     // ground truth - room label
+	}
+
+	message Estimated_location {
+		optional double est_coordinate_x = 1;		         // estimated location - x-coordinate
+		optional double est_coordinate_y = 2;		         // estimated location - y-coordinate
+		optional double est_coordinate_z = 3;		         // estimated location - z-coordinate
+		optional string est_room_label = 4;		         // estimated location - room label
+		optional double latency = 5;				 // latency of location estimation in milliseconds
+		optional double power_consumption = 6;			 // power consumption of location estimation in milliwatts
+	}
+
+	message Scenario_description {
+		required string testbed_label = 1;                       // testbed label
+		required string testbed_description = 2;                 // testbed description
+		required string experiment_description = 3;              // experiment description
+		required string sut_description = 4;                     // SUT description
+		required string receiver_description = 5;                // receiver description
+		required string sender_description = 6;                  // sender description
+		required string interference_description = 7;            // interference description
+	}
+}
