@@ -156,7 +156,7 @@ def type1():
         try:
             measurement_location.localized_node_id = location.localized_node_id
         except:
-            time.sleep(0)
+            pass
         measurement_location.true_coordinate_x = x1 = location.true_coordinate_x
         measurement_location.true_coordinate_y = y1 = location.true_coordinate_y
         measurement_location.est_coordinate_x = x2 = location.est_coordinate_x
@@ -169,7 +169,7 @@ def type1():
             measurement_location.localization_error_3D = math.sqrt(math.pow((x1-x2), 2) + math.pow((y1-y2), 2) + math.pow((z1-z2), 2))
             localization_error_3D[number_of_points] = measurement_location.localization_error_3D
         except:
-            time.sleep(0)
+            pass
         try:
             measurement_location.true_room_label = room1 = location.true_room_label
             measurement_location.est_room_label = room2 = location.est_room_label
@@ -180,17 +180,17 @@ def type1():
                 measurement_location.localization_correct_room = 0
                 number_of_good_rooms[number_of_points] = 0
         except:
-            time.sleep(0)
+            pass
         try:
             measurement_location.latency = location.latency
             latency[number_of_points] = location.latency
         except:
-            time.sleep(0)
+            pass
         try:
             measurement_location.power_consumption = location.power_consumption
             power_consumption[number_of_points] = location.power_consumption
         except:
-            time.sleep(0)
+            pass
 
     experiment_results.primary_metrics.accuracy_error_2D_average = float(sum(localization_error_2D.values()))/number_of_points
     experiment_results.primary_metrics.accuracy_error_2D_min = min(localization_error_2D.values())
@@ -235,7 +235,7 @@ def type1():
         try:
             experiment_results.primary_metrics.power_consumption_average = experiment.power_consumption_per_experiment
         except:
-            time.sleep(0)
+            pass
     
     experiment_results.scenario.testbed_label = experiment.scenario.testbed_label
     experiment_results.scenario.testbed_description = experiment.scenario.testbed_description
@@ -280,25 +280,6 @@ def type3():
         return json.dumps('Experiment is not well defined!')
 
     response ={}
-
-    if experiment.request_raw_data is True:
-        raw_rssi_collection = raw_rssi_pb2.RawRSSIReadingCollection() 
-        apiURL_raw_data = str(experiment.sut_raw_data_URI)
-        
-        data = {}
-        data['coordinate_x'] = experiment.ground_truth.true_coordinate_x
-        data['coordinate_y'] = experiment.ground_truth.true_coordinate_y
-        try:
-            data['coordinate_z'] = experiment.ground_truth.true_coordinate_z
-        except:
-            time.sleep(0)
-        try:
-            data['room_label'] = experiment.ground_truth.true_room_label
-        except:
-            time.sleep(0)
-
-        req = RequestWithMethod(apiURL_raw_data, 'GET', headers={"Content-Type": "application/json"}, data = json.dumps(data))
-        resp = urllib2.urlopen(req)
        
     if experiment.store_metrics is True:
         apiURL_metrics = experiment.metrics_storage_URI
@@ -338,7 +319,7 @@ def type3():
             z2 = location.est_coordinate_z
             localization_error_3D[number_of_points] = math.sqrt(math.pow((x1-x2), 2) + math.pow((y1-y2), 2) + math.pow((z1-z2), 2))
         except:
-            time.sleep(0)
+            pass
         try:
             room1 = location.true_room_label
             room2 = location.est_room_label
@@ -347,15 +328,15 @@ def type3():
             else:
                 number_of_good_rooms[number_of_points] = 0
         except:
-            time.sleep(0)
+            pass
         try:
             latency[number_of_points] = location.latency
         except:
-            time.sleep(0)
+            pass
         try:
             power_consumption[number_of_points] = location.power_consumption
         except:
-            time.sleep(0)
+            pass
 
     # Get location estimate from the SUT
     if experiment.request_estimates is True:
@@ -375,11 +356,11 @@ def type3():
         try:  
             estimated_location['coordinate_z'] = experiment.estimate.est_coordinate_z
         except:
-            time.sleep(0)
+            pass
         try:  
             estimated_location['room_label'] = experiment.estimate.est_room_label
         except:
-            time.sleep(0)
+            pass
 
     measurement_location = experiment_results.locations.add()
     number_of_points += 1
@@ -387,7 +368,7 @@ def type3():
     try:
         measurement_location.localized_node_id = experiment.ground_truth.localized_node_id 
     except:
-        time.sleep(0)
+        pass
     measurement_location.true_coordinate_x = x1 = experiment.ground_truth.true_coordinate_x
     measurement_location.true_coordinate_y = y1 = experiment.ground_truth.true_coordinate_y
     measurement_location.est_coordinate_x = x2 = estimated_location['coordinate_x']
@@ -411,25 +392,25 @@ def type3():
             measurement_location.localization_correct_room = 0
             number_of_good_rooms[number_of_points] = 0
     except:
-        time.sleep(0)
+        pass
     try:
         measurement_location.latency = latency[number_of_points] = loc_est_latency
     except:
-        time.sleep(0)
+        pass
     try:
         measurement_location.latency = latency[number_of_points] = experiment.estimate.latency
     except:
-        time.sleep(0)
+        pass
     try:
         measurement_location.power_consumption = location.power_consumption
         power_consumption[number_of_points] = measurement_location.power_consumption
     except:
-        time.sleep(0)
+        pass
     try:
         measurement_location.power_consumption = experiment.estimate.power_consumption
         power_consumption[number_of_points] = measurement_location.power_consumption
     except:
-        time.sleep(0)
+        pass
     
     experiment_results.primary_metrics.error_2D_average = float(sum(localization_error_2D.values()))/number_of_points
     experiment_results.primary_metrics.error_2D_min = min(localization_error_2D.values())
@@ -462,7 +443,7 @@ def type3():
         try:
             experiment_results.primary_metrics.power_consumption_average = experiment.power_consumption_per_experiment
         except:
-            time.sleep(0)
+            pass
     
     experiment_results.scenario.testbed_label = experiment.scenario.testbed_label
     experiment_results.scenario.testbed_description = experiment.scenario.testbed_description

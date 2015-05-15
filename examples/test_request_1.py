@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""test_request1.py: Request the metrics calculation of the indoor localization experiment performed offline."""
+"""test_request1.py: Request the metrics calculation of the indoor localization experiment 
+   performed offline - send a set of ground-truths and estimates, the service responds with
+   the metrics.
+"""
 
 __author__ = "Filip Lemic"
 __copyright__ = "Copyright 2015, EVARILOS Project"
@@ -24,7 +27,6 @@ apiURI_ECE = 'http://localhost:5002/'
 experiment = message_evarilos_engine_type1_pb2.ece_type1()
 
 # Set the parameters of your experiment
-
 experiment.timestamp_utc = int(time.time())                      # When did the experiment start?
 experiment.experiment_label = 'Test_Experiment'                  # What is the name of the experiment?
 experiment.metrics_storage_URI = 'http://localhost:5001/'        # Where do you want to store the evaluation data?
@@ -45,7 +47,7 @@ location1.true_room_label = 'Room_1'
 location1.est_coordinate_x = 1.1
 location1.est_coordinate_y = 1.01
 location1.est_coordinate_z = 1.9
-location1.est_room_label = 'Room_1.1'
+location1.est_room_label = 'Room_1_1'
 location1.latency = 12.10
 location1.power_consumption = 2.12
 
@@ -71,7 +73,7 @@ location2.localized_node_id = 3
 location2.true_coordinate_x = 3
 location2.true_coordinate_y = 3
 location2.true_coordinate_z = 3
-location2.true_room_label = 'Room_2'
+location2.true_room_label = 'Room_3'
 location2.est_coordinate_x = 3.3
 location2.est_coordinate_y = 4.2
 location2.est_coordinate_z = 1.9
@@ -80,13 +82,13 @@ location2.latency = 15.15
 location2.power_consumption = 1.99
 
 # Define the scenario of the experiment
-experiment.scenario.testbed_label = 'TWIST' 				                        # Label the testbed 
-experiment.scenario.testbed_description = 'Berlin, Office, Bricked walls'           # Give the description
-experiment.scenario.experiment_description = 'Test experiment'                      # Describe your experiment
-experiment.scenario.sut_description = 'MacBook + TP LINK routers + fingerprinting'  # Describe your SUT
-experiment.scenario.receiver_description = 'MacBook + Airport'                      # Describe your receiver(s)
-experiment.scenario.sender_description = 'TP LINK routers beaconing'                # Describe your sender(s)
-experiment.scenario.interference_description = 'No interference'                    # Describe interference scenario
+experiment.scenario.testbed_label = 'dummy' 			 # Label the testbed 
+experiment.scenario.testbed_description = 'dummy'        # Give the description
+experiment.scenario.experiment_description = 'dummy'     # Describe your experiment
+experiment.scenario.sut_description = 'dummy'            # Describe your SUT
+experiment.scenario.receiver_description = 'dummy'       # Describe your receiver(s)
+experiment.scenario.sender_description = 'dummy'         # Describe your sender(s)
+experiment.scenario.interference_description = 'dummy'   # Describe interference scenario
   
 # Send your data to the ECE (EVARILOS Central Engine) service
 # Serialize your protobuffer to binary string 
