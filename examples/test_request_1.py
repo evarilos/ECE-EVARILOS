@@ -30,9 +30,9 @@ experiment = message_evarilos_engine_type1_pb2.ece_type1()
 experiment.timestamp_utc = int(time.time())                      # When did the experiment start?
 experiment.experiment_label = 'Test_Experiment'                  # What is the name of the experiment?
 experiment.metrics_storage_URI = 'http://localhost:5001/'        # Where do you want to store the evaluation data?
-experiment.metrics_storage_database = 'fingerprinting'		     # Name of the database?
-experiment.metrics_storage_collection = 'test' 		             # Name of the collection?
-experiment.store_metrics = False	           		             # Store metrics?	
+experiment.metrics_storage_database = 'test'		             # Name of the database?
+experiment.metrics_storage_collection = 'test'                   # Name of the collection?
+experiment.store_metrics = False                                 # Store metrics?	
 
 # Give the set of measurment locations
 
@@ -82,7 +82,7 @@ location2.latency = 15.15
 location2.power_consumption = 1.99
 
 # Define the scenario of the experiment
-experiment.scenario.testbed_label = 'dummy' 			 # Label the testbed 
+experiment.scenario.testbed_label = 'dummy'              # Label the testbed 
 experiment.scenario.testbed_description = 'dummy'        # Give the description
 experiment.scenario.experiment_description = 'dummy'     # Describe your experiment
 experiment.scenario.sut_description = 'dummy'            # Describe your SUT
