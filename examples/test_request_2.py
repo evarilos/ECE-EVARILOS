@@ -31,16 +31,16 @@ experiment = message_evarilos_engine_type2_pb2.ece_type2()
 
 experiment.timestamp_utc = int(time.time())                 # When did the experiment start?
 experiment.experiment_label = 'Test_experiment'             # What is the name of the experiment?
-experiment.store_metrics = True 				            # Storing metrics?
-experiment.request_power_consumption = False 		        # Request power consumption?
+experiment.store_metrics = True                             # Storing metrics?
+experiment.request_power_consumption = False                # Request power consumption?
 	
 # Storing metrics
 experiment.metrics_storage_URI = 'http://localhost:5001/';  # URI for storing the processed data
-experiment.metrics_storage_database = 'test';		        # Name of the database for storing the results
+experiment.metrics_storage_database = 'test';               # Name of the database for storing the results
 experiment.metrics_storage_collection = 'test';             # Name of the collection for storing the results  
 
 # Define the scenario of the experiment
-experiment.scenario.testbed_label = 'dummy' 				# Label the testbed 
+experiment.scenario.testbed_label = 'dummy'                 # Label the testbed 
 experiment.scenario.testbed_description = 'dummy'           # Give the description
 experiment.scenario.experiment_description = 'dummy'        # Describe your experiment
 experiment.scenario.sut_description = 'dummy'               # Describe your SUT
@@ -68,7 +68,6 @@ experiment.estimate.power_consumption = 1.0
 experiment_string = experiment.SerializeToString()
 
 # Send your data to over HTTP to the ECE service	
-
 req = RequestWithMethod(apiURI_ECE + 'evarilos/ece/v1.0/add_one_location', 'POST', headers={"Content-Type": "application/x-protobuf"}, data = experiment_string)
 resp = urllib2.urlopen(req)
 response = json.loads(resp.read())

@@ -34,7 +34,7 @@ experiment.metrics_storage_database = 'test'                     # Name of the d
 experiment.metrics_storage_collection = 'test'                   # Name of the collection?
 experiment.store_metrics = False                                 # Store metrics?	
 
-# Give the set of measurment locations
+# Give the set of measurement locations
 
 # Location 1
 location1 = experiment.locations.add()
