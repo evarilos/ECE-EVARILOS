@@ -30,7 +30,7 @@ experiment = message_evarilos_engine_type1_pb2.ece_type1()
 experiment.timestamp_utc = int(time.time())                      # When did the experiment start?
 experiment.experiment_label = 'Test_Experiment'                  # What is the name of the experiment?
 experiment.metrics_storage_URI = 'http://localhost:5001/'        # Where do you want to store the evaluation data?
-experiment.metrics_storage_database = 'test'		             # Name of the database?
+experiment.metrics_storage_database = 'test'                     # Name of the database?
 experiment.metrics_storage_collection = 'test'                   # Name of the collection?
 experiment.store_metrics = False                                 # Store metrics?	
 
