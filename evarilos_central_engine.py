@@ -240,7 +240,7 @@ def type1():
     experiment_results.scenario.testbed_label = experiment.scenario.testbed_label
     experiment_results.scenario.testbed_description = experiment.scenario.testbed_description
     experiment_results.scenario.experiment_description = experiment.scenario.experiment_description
-    experiment_results.scenario.sut_description = experiment.scenario.sut_description
+    experiment_results.sut.sut_name = experiment.scenario.sut_description
     experiment_results.scenario.receiver_description = experiment.scenario.receiver_description 
     experiment_results.scenario.sender_description = experiment.scenario.sender_description  
     experiment_results.scenario.interference_description = experiment.scenario.interference_description
@@ -448,7 +448,7 @@ def type3():
     experiment_results.scenario.testbed_label = experiment.scenario.testbed_label
     experiment_results.scenario.testbed_description = experiment.scenario.testbed_description
     experiment_results.scenario.experiment_description = experiment.scenario.experiment_description
-    experiment_results.scenario.sut_description = experiment.scenario.sut_description
+    experiment_results.sut.sut_name = experiment.scenario.sut_description
     experiment_results.scenario.receiver_description = experiment.scenario.receiver_description 
     experiment_results.scenario.sender_description = experiment.scenario.sender_description  
     experiment_results.scenario.interference_description = experiment.scenario.interference_description
