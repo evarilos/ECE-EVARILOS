@@ -7,3 +7,4 @@ Documentation:
 
 http://www.tkn.tu-berlin.de/fileadmin/fg112/Papers/2014/lemic14_service_for_calculation.pdf
 http://www.tkn.tu-berlin.de/fileadmin/fg112/Papers/2015/lemic15_platform_evaluation.pdf
+http://www.tkn.tu-berlin.de/fileadmin/fg112/Papers/2015/lemic15demo_abstract_virtual.pdf
